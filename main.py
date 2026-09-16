@@ -52,7 +52,7 @@ def handle_start(message, user):
         return
     db.save_user(user.id, user.username or "", user.full_name or "")
     if db.is_blocked(user.id):
-        bot.send_message(chat_id=chat_id, text="⛔ شما توسط مدیریت مسدود شده‌اید.")
+        bot.send_message(chat_id=chat_id, text="⛔ شما توسط امیر مسدود شده‌اید.")
         return
     bot.send_message(chat_id=chat_id, text="سلام 👋\nپیامت رو بگو تا به امیر منتقل کنم ✉️")
 
@@ -127,7 +127,7 @@ def handle_admin_message(message, user):
         db.block_user(uid)
         bot.send_message(chat_id=ADMIN_ID, text=f"⛔ کاربر {uid} بلاک شد.")
         try:
-            bot.send_message(chat_id=uid, text="⛔ شما توسط مدیریت مسدود شدید.")
+            bot.send_message(chat_id=uid, text="⛔ شما توسط امیر مسدود شدید.")
         except Exception:
             pass
         return
@@ -165,7 +165,7 @@ def handle_admin_message(message, user):
             bot.send_message(chat_id=ADMIN_ID, text="❌ کاربر پیدا نشد.")
             return
         try:
-            bot.send_message(chat_id=target_id, text="📬 پاسخ مدیریت:\n➖➖➖➖➖➖")
+            bot.send_message(chat_id=target_id, text="📬 پاسخ امیر:\n➖➖➖➖➖➖")
             bot.copy_message(
                 chat_id=target_id,
                 from_chat_id=ADMIN_ID,
