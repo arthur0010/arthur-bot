@@ -5,7 +5,6 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 import database as db
 
-# ============ تنظیمات ============
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 ADMIN_ID = int(os.environ.get("ADMIN_ID", "0"))
 RENDER_URL = os.environ.get("RENDER_EXTERNAL_URL", "")
@@ -14,7 +13,6 @@ flask_app = Flask(__name__)
 bot = telegram.Bot(token=TOKEN)
 
 
-# ============ ابزار کمکی ============
 def esc(text):
     import html
     return html.escape(str(text or ""))
@@ -31,7 +29,6 @@ def admin_buttons(user_id, is_blocked):
     return InlineKeyboardMarkup([[btn]])
 
 
-# ============ هندلرها ============
 def handle_start(message, user):
     chat_id = message.chat_id
     if user.id == ADMIN_ID:
@@ -229,7 +226,6 @@ def handle_callback(cb):
             pass
 
 
-# ============ Webhook Endpoint ============
 @flask_app.route("/", methods=["GET"])
 def index():
     return "Relay Bot is running ✅", 200
@@ -276,7 +272,6 @@ def webhook():
         return "OK", 200
 
 
-# ============ ست کردن Webhook ============
 def setup_webhook():
     if not RENDER_URL:
         print("⚠️ RENDER_EXTERNAL_URL ست نشده")
@@ -291,7 +286,6 @@ def setup_webhook():
         print(f"❌ خطا تو ست کردن Webhook: {e}")
 
 
-# ============ اجرا ============
 if __name__ == "__main__":
     db.init_db()
     setup_webhook()
