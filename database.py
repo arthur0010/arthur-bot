@@ -9,7 +9,6 @@ def init_db():
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
 
-    # جدول کاربران
     c.execute("""
         CREATE TABLE IF NOT EXISTS users (
             user_id     INTEGER PRIMARY KEY,
@@ -20,8 +19,7 @@ def init_db():
             last_seen   TEXT
         )
     """)
-
-    # جدول نگاشت پیام ادمین → کاربر
+    
     c.execute("""
         CREATE TABLE IF NOT EXISTS msg_map (
             admin_msg_id  INTEGER PRIMARY KEY,
@@ -38,7 +36,6 @@ def _now():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
-# ============ مدیریت کاربران ============
 
 def save_user(user_id, username, full_name):
     """ذخیره یا به‌روزرسانی کاربر."""
@@ -122,7 +119,6 @@ def count_users():
     return total, blocked
 
 
-# ============ مدیریت بلاک ============
 
 def is_blocked(user_id):
     """آیا کاربر بلاک شده؟"""
